@@ -112,7 +112,7 @@ module.exports = (options, context) => {
           continue;
         }
         if (url.indexOf("*") > -1) {
-          wildcard.push(new RegExp("^" + url.replaceAll("*", ".*") + "$"));
+          wildcard.push(new RegExp("^" + url.toString().replaceAll("*", ".*") + "$"));
         }
       }
 
