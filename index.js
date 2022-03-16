@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
 const { createSitemap } = require('sitemap')
-const { RuleTester } = require('eslint')
 
 const log = (msg, color = 'blue', label = 'SITEMAP') =>
   console.log(`\n${chalk.reset.inverse.bold[color](` ${label} `)} ${msg}`)
@@ -120,14 +119,11 @@ module.exports = (options, context) => {
       pagesMap.forEach((page, url) => {
         // 改一下这里的判断
         let canJoin = true;
-        try {
-          wildcard.forEach((reg) => {
-            if (reg.test(url)) {
-              canJoin = false;
-              throw Error();
-            }
-          })
-        } catch (e) {
+        for (let reg of wildcard) {
+          if (reg.test(url)) {
+            canJoin = false;
+            break;
+          }
         }
         // 加入sitemap判断
         if (canJoin && !exclude.includes(url)) {
