@@ -1,3 +1,7 @@
+# 1.0.4
+
+js 没有 `replaceAll` 方法 ,替换成 `replace`
+
 # 1.0.3
 
 fix: TypeError: url.replaceAll is not a function
