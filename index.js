@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
 const { createSitemap } = require('sitemap')
+const { RuleTester } = require('eslint')
 
 const log = (msg, color = 'blue', label = 'SITEMAP') =>
   console.log(`\n${chalk.reset.inverse.bold[color](` ${label} `)} ${msg}`)
@@ -101,8 +102,35 @@ module.exports = (options, context) => {
         xslUrl
       })
 
+      /* 正则数组 */
+      let wildcard = [];
+      /* 排除两个和两个以上的星号 */
+      let multipleAsterisks = new RegExp('/\\*{2,}/');
+
+      /* 初始化正则数组 */
+      for (let url of exclude) {
+        if (multipleAsterisks.test(url)) {
+          continue;
+        }
+        if (url.indexOf("*") > -1) {
+          wildcard.push(new RegExp("^" + url.replaceAll("*", ".*") + "$"));
+        }
+      }
+
       pagesMap.forEach((page, url) => {
-        if (!exclude.includes(url)) {
+        // 改一下这里的判断
+        let canJoin = true;
+        try {
+          wildcard.forEach((reg) => {
+            if (reg.test(url)) {
+              canJoin = false;
+              throw Error();
+            }
+          })
+        } catch (e) {
+        }
+        // 加入sitemap判断
+        if (canJoin && !exclude.includes(url)) {
           sitemap.add({
             url: withBase(url),
             ...page

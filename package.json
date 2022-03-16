@@ -1,14 +1,14 @@
 {
-  "name": "vuepress-plugin-sitemap",
-  "version": "2.3.1",
-  "description": "Sitemap generator plugin for vuepress",
+  "name": "vuepress-plugin-sitemap-ybd",
+  "version": "1.0.1",
+  "description": "update for vuepress-plugin-sitemap",
   "main": "index.js",
   "bin": {
     "vuepress-sitemap": "./cli.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ekoeryanto/vuepress-plugin-sitemap.git"
+    "url": "git+https://github.com/ybd0612/vuepress-plugin-sitemap.git"
   },
   "scripts": {
     "release": "release-it",
@@ -22,12 +22,12 @@
     "sitemap",
     "generator"
   ],
-  "author": "Eko Eryanto <ekoeryanto@gmail.com>",
+  "author": "Ybond <ybd0612@qq.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ekoeryanto/vuepress-plugin-sitemap/issues"
+    "url": "https://github.com/ybd0612/vuepress-plugin-sitemap/issues"
   },
-  "homepage": "https://github.com/ekoeryanto/vuepress-plugin-sitemap#readme",
+  "homepage": "https://github.com/ybd0612/vuepress-plugin-sitemap#readme",
   "dependencies": {
     "sitemap": "^3.0.0"
   },
