@@ -21,6 +21,7 @@ module.exports = (options, context) => {
     outFile = 'sitemap.xml',
     changefreq = 'daily',
     exclude = [],
+    noExclude = [],
     dateFormatter = (lastUpdated) => new Date(lastUpdated).toISOString(),
     ...others
   } = options
@@ -117,6 +118,14 @@ module.exports = (options, context) => {
       }
 
       pagesMap.forEach((page, url) => {
+        // 如果是不排除的页面就直接加入
+        if(noExclude.includes(url)){
+          sitemap.add({
+            url: withBase(url),
+            ...page
+          })
+        }
+
         // 改一下这里的判断
         let canJoin = true;
         for (let reg of wildcard) {
