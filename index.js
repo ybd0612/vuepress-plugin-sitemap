@@ -112,8 +112,8 @@ module.exports = (options, context) => {
         if (multipleAsterisks.test(url)) {
           continue;
         }
-        if (url.indexOf("*") > -1) {
-          wildcard.push(new RegExp("^" + url.replace(/\*/g, ".*") + "$"));
+        if (url.indexOf("*") > -1 || url.indexOf("^") > -1 ) {
+          wildcard.push(new RegExp("^" + url.replace(/\*/g, ".*").replace(/(\^.{1})/mg, "[$1]") + "$"));
         }
       }
 
